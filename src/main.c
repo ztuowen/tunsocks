@@ -47,7 +47,7 @@ static struct conn_info *parse_conn_info(const char *str, int fmax)
 {
 	int fields = 1;
 	int f0;
-	const char *field[4] = {NULL, NULL, NULL, NULL};
+	const char *field[5] = {NULL, NULL, NULL, NULL};
 	struct conn_info *info;
 
 	for (field[0] = str; *str; str++)
@@ -57,6 +57,7 @@ static struct conn_info *parse_conn_info(const char *str, int fmax)
 			field[fields] = str + 1;
 			fields++;
 		}
+    field[fields]=str+1;
 
 	f0 = fields == fmax ? 1 : 0;
 
@@ -201,7 +202,7 @@ int main(int argc, char *argv[])
 			socks = info;
 			break;
 		case 'R':
-			info = parse_conn_info(optarg, 3);
+			info = parse_conn_info(optarg, 4);
 			if (!info)
 				print_usage(argv[0]);
 
