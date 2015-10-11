@@ -58,13 +58,13 @@ static struct conn_info *parse_conn_info(const char *str, int fmax)
 			fields++;
 		}
 
-	f0 = fields == 4 ? 1 : 0;
+	f0 = fields == fmax ? 1 : 0;
 
 	info = calloc(1, sizeof(*info));
 
 	info->bind_port = strndup(field[f0], field[f0 + 1] - field[f0] - 1);
 
-	if (fields == 4)
+	if (fields == fmax)
 		info->bind = strndup(field[0], field[1] - field[0] - 1);
 	else
 		info->bind = NULL;
